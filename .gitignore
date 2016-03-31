@@ -27,9 +27,9 @@ _testmain.go
 
 *.tmp
 
-.idea
-
 songbox
 
 static/components
 static/webapp
+
+.idea/
