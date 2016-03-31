@@ -1,11 +1,11 @@
 'use strict';
 
-module.exports = function (React, Router) {
+module.exports = function (React, Router, songsStore) {
     var DefaultRoute = Router.DefaultRoute;
     var Route = Router.Route;
     var NotFoundRoute = Router.NotFoundRoute;
 
-    var App = require('./components/app.jsx')(React, Router);
+    var App = require('./components/app.jsx')(React, Router, songsStore);
 
     // Pages
 

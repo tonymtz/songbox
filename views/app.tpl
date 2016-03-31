@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Songbox</title>
-    <link rel="stylesheet" href="/static/webapp/css/bundle.css"/>
+    <!--<link rel="stylesheet" href="/static/webapp/css/bundle.css"/>-->
 </head>
 <body>
 <div id="app"></div>

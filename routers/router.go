@@ -8,10 +8,12 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 
-	beego.Include(&controllers.LoginController{})
+	apiv1 := beego.NewNamespace("/v1",
+		beego.NSRouter("/songs", &controllers.SongsController{}),
+		beego.NSRouter("/songs/:path", &controllers.SongsController{}, "get:GetOne"),
+	)
 
-	beego.Router("/v1/songs", &controllers.SongsController{})
-	beego.Router("/v1/songs/:path", &controllers.SongsController{})
+	beego.AddNamespace(apiv1)
 
 	beego.Router("/app", &controllers.AppController{})
 
