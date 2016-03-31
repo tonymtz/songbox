@@ -1,0 +1,40 @@
+.valign-wrapper {
+    height: 40em;
+}
+
+.valign {
+    width: 100%;
+}
+
+img.bkg {
+    position: absolute;
+    top: 0;
+    z-index: -10;
+    height: 100%;
+    width: 100%;
+}
+
+.overlay {
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    z-index: 8;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 30%, transparent 70%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+.icon {
+    display: inline-block;
+    width: 2em;
+    height: 1.8em;
+    fill: currentColor;
+    vertical-align: middle;
+}
+
+body {
+    background-color: red;
+}
+
+.container {
+    padding: 7em 3em;
+}
