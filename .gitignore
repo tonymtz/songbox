@@ -25,6 +25,10 @@ _testmain.go
 *.test
 *.prof
 
+*.tmp
+
+.idea
+
 songbox
 
 static/components
