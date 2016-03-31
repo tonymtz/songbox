@@ -8,7 +8,10 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 
+	beego.Include(&controllers.LoginController{})
+
 	beego.Router("/v1/songs", &controllers.SongsController{})
+	beego.Router("/v1/songs/:path", &controllers.SongsController{})
 
 	beego.Router("/app", &controllers.AppController{})
 
