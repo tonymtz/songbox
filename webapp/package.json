@@ -1,26 +1,27 @@
 {
-  "name": "psadmin",
+  "name": "songbox",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "scripts": {
     "start": "gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Cory House",
-  "license": "ISC",
+  "repository": "https://github.com/tonymtz/songbox",
+  "author": "tonymtz",
+  "license": "MIT",
   "dependencies": {
-    "browserify": "^11.0.1",
-    "flux": "^2.0.3",
+    "browserify": "11.0.1",
     "fluxtore": "0.0.6",
-    "gulp": "^3.9.0",
-    "gulp-concat": "^2.6.0",
-    "gulp-connect": "^2.2.0",
-    "gulp-eslint": "^0.15.0",
-    "gulp-open": "^1.0.0",
-    "react": "^0.13.3",
-    "react-router": "^0.13.3",
-    "reactify": "^1.1.1",
-    "vinyl-source-stream": "^1.1.0"
+    "gulp": "3.9.0",
+    "gulp-concat": "2.6.0",
+    "gulp-connect": "2.2.0",
+    "gulp-eslint": "0.15.0",
+    "gulp-open": "1.0.0",
+    "react": "0.13.3",
+    "react-router": "0.13.3",
+    "reactify": "1.1.1",
+    "request": "2.69.0",
+    "vinyl-source-stream": "1.1.0"
   }
 }

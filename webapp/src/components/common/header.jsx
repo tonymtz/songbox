@@ -7,10 +7,24 @@ module.exports = function (React, Router) {
         render: function () {
             return (
                 <nav>
-                    <ul>
-                        <li><Link to="app">Home</Link></li>
-                        <li><Link to="about">About</Link></li>
-                    </ul>
+                    <div className="nav-wrapper light-blue">
+                        <div className="container">
+                            <Link to="app" className="brand-logo left">Songbox</Link>
+
+                            <ul className="right">
+                                <li>
+                                    <Link to="app">
+                                        <i className="material-icons">library_music</i>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="about">
+                                        <i className="material-icons">info</i>
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </nav>
             );
         }

@@ -1,3 +1,34 @@
+/* NEW */
+
+/* webapp */
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/*#app .nav-wrapper {*/
+    /*background-color: #5DAFD1;*/
+/*}*/
+
+/*#app .nav-wrapper a.active {*/
+    /*background-color: #54A7C9;*/
+/*}*/
+
+/*#app .nav-wrapper .brand-logo img {*/
+    /*height: 48px;*/
+    /*width: 48px;*/
+    /*vertical-align: middle;*/
+/*}*/
+
+/* END NEW */
+
+/*
 .valign-wrapper {
     height: 40em;
 }
@@ -38,3 +69,4 @@ body {
 .container {
     padding: 7em 3em;
 }
+*/

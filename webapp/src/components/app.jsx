@@ -1,8 +1,7 @@
 'use strict';
 
-module.exports = function (React, Router, songsStore) {
+module.exports = function (React, Router) {
     var Header = require('./common/header.jsx')(React, Router);
-    var Playlist = require('./playlist/playlist.jsx')(React, songsStore);
     var RouterHandler = Router.RouteHandler;
 
     return React.createClass({
@@ -10,8 +9,9 @@ module.exports = function (React, Router, songsStore) {
             return (
                 <div>
                     <Header/>
-                    <Playlist/>
-                    <RouterHandler/>
+                    <div className="container">
+                        <RouterHandler/>
+                    </div>
                 </div>
             );
         }

@@ -36,14 +36,17 @@ func (c *SongsController) Prepare() {
 func (c *SongsController) Get() {
 	dbProvider := c.Ctx.Input.GetData("dropbox_provider").(*dropbox.Dropbox)
 
-	metadata, _ := dbProvider.Metadata("songbox", true, false, "", "", 0)
+	metadata, _ := dbProvider.Metadata("", true, false, "", "", 0)
 
 	var songCollection []models.Song
 
 	for _, song := range metadata.Contents {
+		// TODO - what happens with paths?
+		songPath := strings.TrimPrefix(song.Path, "/")
+
 		newSong := models.Song{
-			Path: strings.Replace(song.Path, "/", "~", -1),
-			Title: strings.TrimPrefix(song.Path, "/songbox/"),
+			Path: songPath,
+			Title: songPath,
 		}
 		songCollection = append(songCollection, newSong)
 	}

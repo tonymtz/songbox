@@ -4,8 +4,10 @@ module.exports = function (React) {
     return React.createClass({
         render: function () {
             return (
-                <div>
-                    <h1>About</h1>
+                <div className="row">
+                    <div className="col s12">
+                        <h4>About</h4>
+                    </div>
                 </div>
             );
         }

@@ -16,13 +16,13 @@ var config = {
         html: './src/*.html',
         js: './src/**/*.jsx',
         css: [
-            'node_modules/bootstrap/dist/css/bootstrap.min.css',
-            'node_modules/bootstrap/dist/css/bootstrap-theme.min.css'
+            '../static/css/materialize.min.css',
+            '../static/css/main.css'
         ],
         dist: '../static/webapp',
         mainJs: './src/main.jsx'
     }
-}
+};
 
 //Start a local development server
 gulp.task('connect', function () {
