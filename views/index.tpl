@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Songbox</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-    <!-- favicon -->
-
-    <link rel="stylesheet" href="static/components/Materialize/dist/css/materialize.min.css"/>
-    <link rel="stylesheet" href="static/css/main.css"/>
-
-    <script src="static/components/jquery/dist/jquery.min.js"></script>
-    <script src="static/components/Materialize/dist/js/materialize.min.js"></script>
-</head>
-<body class="valign-wrapper">
-
 <svg display="none" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
         <symbol id="icon-dropbox" viewBox="0 0 16 16">
@@ -29,22 +12,22 @@
     </defs>
 </svg>
 
-<div class="container white">
-    <div class="row">
-        <header class="center-align">
-            <h1>This is you Songbox :)</h1>
-
-            <a href="/login" class="waves-effect waves-light btn-large light-blue">
+<div class="section section__hero">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m7">
+                <h1 class="header">This is your Songbox</h1>
+                <h5 class="header">Soundbox is a media player that lets you listen your favorite music directly from your <span>Dropbox</span>.</h5>
+            </div>
+            <div class="col s12 m5 songbox"></div>
+        </div>
+        <div class="row center">
+            <a href="#" class="waves-effect waves-teal btn btn-large white">
                 <svg class="icon icon-dropbox">
                     <use xlink:href="#icon-dropbox"></use>
                 </svg>
-                <span class="mls"> Login with Dropbox</span>
+                <span class="mls"> Start Now!</span>
             </a>
-        </header>
-        <div class="col s12 center-align">
-            <p>Soundbox is an audio player that lets you listen your favorite music directly from your Dropbox.</p>
         </div>
     </div>
 </div>
-</body>
-</html>

@@ -2,28 +2,28 @@
 
 /* webapp */
 
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
+/*body {*/
+/*display: flex;*/
+/*min-height: 100vh;*/
+/*flex-direction: column;*/
+/*}*/
 
-main {
-    flex: 1 0 auto;
-}
+/*main {*/
+/*flex: 1 0 auto;*/
+/*}*/
 
 /*#app .nav-wrapper {*/
-    /*background-color: #5DAFD1;*/
+/*background-color: #5DAFD1;*/
 /*}*/
 
 /*#app .nav-wrapper a.active {*/
-    /*background-color: #54A7C9;*/
+/*background-color: #54A7C9;*/
 /*}*/
 
 /*#app .nav-wrapper .brand-logo img {*/
-    /*height: 48px;*/
-    /*width: 48px;*/
-    /*vertical-align: middle;*/
+/*height: 48px;*/
+/*width: 48px;*/
+/*vertical-align: middle;*/
 /*}*/
 
 /* END NEW */
@@ -70,3 +70,103 @@ body {
     padding: 7em 3em;
 }
 */
+
+/*------------------------------------*\
+    #Section META
+\*------------------------------------*/
+.section {
+    /*
+     * Don't touch .flow-text because
+     * it has special properties defined by
+     * materialize.css. All other based in at 18px.
+     */
+}
+
+.section p:not(.flow-text) {
+    font-size: 1.2rem;
+}
+
+.section h2 {
+    color: #DD5A2B;
+    font-weight: bold;
+    margin: 3rem 0 4rem;
+}
+
+.section .btn {
+    background-color: #26a69a;
+}
+
+/*------------------------------------*\
+    #HERO Section
+\*------------------------------------*/
+.section__hero {
+    height: 100vh;
+    height: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    position: relative;
+    background-color: #03a9f4;
+}
+
+.section__hero h1.header,
+.section__hero h5.header{
+    color: white;
+}
+
+.section__hero h5 {
+    line-height: 2.3rem;
+}
+
+.section__hero h5 span {
+    border-bottom: 2px solid white;
+}
+
+.section__hero h1 {
+    font-weight: bold;
+    font-size: 4.2rem;
+    line-height: 1.10;
+    color: #393939;
+}
+
+.section__hero .btn {
+    color: #03a9f4;
+    font-size: 1.5em;
+    width: 20rem;
+    margin-top: 1.5rem;
+}
+
+.section__hero .btn-large {
+    height: 74px;
+    line-height: 76px;
+}
+
+.section__hero .btn .icon {
+    display: inline-block;
+    width: 2em;
+    height: 1.8em;
+    fill: currentColor;
+    vertical-align: middle;
+}
+
+.section__hero .songbox {
+    display: inline-block;
+    height: 330px;
+    background-image: url("/static/favicon/ms-icon-310x310.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.section__hero .btn__main-cta {
+    height: 3rem;
+}
+
+@media (max-width: 993px) {
+    .section__hero {
+        height: auto;
+    }
+
+    .section__hero h1 {
+        font-size: 3.5rem;
+    }
+}

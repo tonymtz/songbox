@@ -16,6 +16,7 @@ type AppController struct {
 }
 
 func (c *AppController) Get() {
+	c.Layout = "layout.html"
 	c.TplName = "app.tpl"
 	//o := orm.NewOrm()
 	//
