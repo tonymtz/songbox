@@ -27,9 +27,9 @@ _testmain.go
 
 *.tmp
 
-.DS_Store
-
 songbox
+songbox.tar.gz
+.DS_Store
 
 static/components
 static/webapp

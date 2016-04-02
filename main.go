@@ -7,6 +7,7 @@ import (
 	"github.com/astaxie/beego/orm"
 
 	_ "github.com/mattn/go-sqlite3"
+	"os"
 )
 
 func init() {
@@ -24,6 +25,12 @@ func init() {
 }
 
 func main() {
+	runMode := os.Getenv("BEEGO_RUNMODE")
+
+	if runMode == "prod" {
+		beego.BConfig.RunMode = "prod"
+	}
+
 	beego.Run()
 }
 
