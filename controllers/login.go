@@ -2,11 +2,12 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/config"
 	"fmt"
 
 	"github.com/tonymtz/goauth-dropbox/dropboxOAuth"
-	//"github.com/stacktic/dropbox"
-	//"github.com/tonymtz/songbox/models"
+//"github.com/stacktic/dropbox"
+//"github.com/tonymtz/songbox/models"
 )
 
 var dropboxHandler *dropboxOAuth.OAuth2Handler
@@ -33,8 +34,6 @@ func (c *LoginController) Get() {
 	//c.TplName = "index.tpl"
 
 	authcode := c.GetString("code")
-
-	fmt.Println(dropboxHandler.AuthorizeURL())
 
 	if authcode == "" {
 		c.Redirect(dropboxHandler.AuthorizeURL(), 302)
@@ -84,9 +83,16 @@ func (c *LoginController) Callback() {
 }
 
 func init() {
+	// Dropbox
+	iniconf, err := config.NewConfig("ini", "conf/dropbox.conf")
+
+	if err != nil {
+		beego.Error(err)
+	}
+
 	dropboxHandler = &dropboxOAuth.OAuth2Handler{
-		Key: beego.AppConfig.String("dropbox_key"),
-		Secret: beego.AppConfig.String("dropbox_secret"),
-		RedirectURI: "http://localhost:8080/login/callback",
+		Key: iniconf.String("dropbox_key"),
+		Secret: iniconf.String("dropbox_secret"),
+		RedirectURI: beego.AppConfig.String("dropbox_redirect_url"),
 	}
 }
