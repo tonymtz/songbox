@@ -7,22 +7,24 @@ var fluxtore = require('fluxtore');
 
 // Stores
 
-var songsStoreFactory = require('./stores/songsStore.jsx');
-var songsStore = songsStoreFactory(fluxtore, request);
+var playlistStoreFactory = require('./stores/playlistStore.jsx');
+var playlistStore = playlistStoreFactory(fluxtore, request);
+var songStoreFactory = require('./stores/songStore.jsx');
+var songStore = songStoreFactory(fluxtore, request);
 
 // Components
 
 var cardFactory = require('./components/playlist/card.jsx');
-var Card = cardFactory(React, songsStore);
+var Card = cardFactory(React, songStore);
 var playlistFactory = require('./components/playlist/playlist.jsx');
-var Playlist = playlistFactory(React, Card, songsStore);
+var Playlist = playlistFactory(React, Card, playlistStore);
 var playerFactory = require('./components/common/player.jsx');
-var Player = playerFactory(React, songsStore);
+var Player = playerFactory(React, songStore);
 
 // Pages
 
-var App = require('./components/app.jsx')(React, Router, songsStore);
-var Home = require('./components/homePage.jsx')(React, Playlist, Player);
+var App = require('./components/app.jsx')(React, Router, Player);
+var Home = require('./components/homePage.jsx')(React, Playlist);
 var About = require('./components/about/aboutPage.jsx')(React);
 var NotFound = require('./components/notFound/notFoundPage.jsx')(React);
 

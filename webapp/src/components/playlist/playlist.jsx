@@ -1,21 +1,21 @@
 'use strict';
 
-module.exports = function (React, Card, songsStore) {
+module.exports = function (React, Card, playlistStore) {
     return React.createClass({
         getInitialState: function () {
-            return songsStore.getList();
+            return playlistStore.get();
         },
 
         componentWillMount: function () {
-            songsStore.addChangeListener(this.onSongsStateChange);
+            playlistStore.addChangeListener(this.onSongStateChange);
         },
 
         componentWillUnmount: function () {
-            songsStore.removeChangeListener(this.onSongsStateChange);
+            playlistStore.removeChangeListener(this.onSongStateChange);
         },
 
-        onSongsStateChange: function () {
-            this.setState(songsStore.getList());
+        onSongStateChange: function () {
+            this.setState(playlistStore.get());
         },
 
         createCards: function () {
@@ -24,15 +24,13 @@ module.exports = function (React, Card, songsStore) {
                     <Card
                         key={index}
                         song={song}
-                        title={song.title}
-                        path={song.path}
                     />
                 );
             });
         },
 
         refreshSongs: function () {
-            return songsStore.refresh();
+            return playlistStore.refresh();
         },
 
         render: function () {

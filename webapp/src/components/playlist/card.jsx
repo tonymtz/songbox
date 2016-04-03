@@ -1,19 +1,18 @@
 'use strict';
 
-module.exports = function (React, songsStore) {
+module.exports = function (React, songStore) {
+    // TODO - duplicating props
     return React.createClass({
         propTypes: {
-            song: React.PropTypes.object.isRequired,
-            title: React.PropTypes.string.isRequired,
-            path: React.PropTypes.string.isRequired
+            song: React.PropTypes.object.isRequired
         },
 
         onPlayClick: function () {
-            songsStore.play(this.props.song);
+            songStore.play(this.props.song);
         },
 
         render: function () {
-            var title = this.props.title;
+            var title = this.props.song.title;
 
             return (
                 <li className="collection-item">

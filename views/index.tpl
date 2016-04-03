@@ -22,7 +22,7 @@
             <div class="col s12 m5 songbox"></div>
         </div>
         <div class="row center">
-            <a href="#" class="waves-effect waves-teal btn btn-large white">
+            <a href="/login" class="waves-effect waves-teal btn btn-large white">
                 <svg class="icon icon-dropbox">
                     <use xlink:href="#icon-dropbox"></use>
                 </svg>

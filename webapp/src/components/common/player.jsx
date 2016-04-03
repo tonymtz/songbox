@@ -1,14 +1,22 @@
 'use strict';
 
-module.exports = function (React, songsStore) {
+module.exports = function (React, songStore) {
     var _audio;
     var _isPlaying;
     var _progress;
 
+    function update(currentState, newState) {
+        var resultState = Object.create(currentState);
+        for (var prop in currentState) {
+            resultState[prop] = newState[prop] || currentState[prop];
+        }
+        return resultState;
+    }
+
     return React.createClass({
         getInitialState: function () {
             return {
-                currentSong: songsStore.getSelected(),
+                currentSong: songStore.get(),
                 audio: null,
                 isPlaying: null,
                 progress: null
@@ -16,51 +24,64 @@ module.exports = function (React, songsStore) {
         },
 
         componentWillMount: function () {
-            songsStore.addChangeListener(this.onSongsStateChange);
+            songStore.addChangeListener(this.onSongStateChange);
         },
 
         componentWillUnmount: function () {
-            songsStore.removeChangeListener(this.onSongsStateChange);
+            songStore.removeChangeListener(this.onSongStateChange);
         },
 
-        onSongsStateChange: function () {
-            this.setState(songsStore.getSelected());
+        onSongStateChange: function () {
+            var currentSong = songStore.get();
 
-            var song = this.state.song || {};
-
-            if (!song.url) {
-                return;
+            if (this.state.audio) {
+                this.state.audio.pause();
             }
 
-            _audio = new Audio(song.url);
-            _isPlaying = true;
-            _audio.play();
+            var audio, isPlaying;
 
-            _audio.addEventListener('timeupdate', this.onTimeUpdate);
+            if (currentSong.url) {
+                isPlaying = true;
+                audio = new Audio(currentSong.url);
+                audio.play();
+                audio.addEventListener('timeupdate', this.onTimeUpdate);
+            } else {
+                isPlaying = false;
+                audio = null;
+            }
+
+            var newState = update(this.state, {
+                currentSong: currentSong,
+                audio: audio,
+                isPlaying: isPlaying,
+                progress: 0
+            });
+
+            this.setState(newState);
         },
 
         onTimeUpdate: function () {
-            var el = _audio;
-            var number = el.currentTime / el.duration * 100;
+            var audio = this.state.audio;
+            var number = audio.currentTime / audio.duration * 100;
+            var isPlaying = number < 100;
 
-            this.setState({
-                progress: number
+            var newState = update(this.state, {
+                progress: number,
+                isPlaying: isPlaying
             });
 
-            if (number === 100) {
-                _isPlaying = false;
-            }
+            this.setState(newState);
         },
 
         render: function () {
-            var song = this.state.song || {title: 'Welcome 2 Songbox'};
+            var currentSong = this.state.currentSong || {title: 'Welcome 2 Songbox'};
             var progress = this.state.progress ? this.state.progress.toFixed(3) : 0;
 
             return (
                 <div className="row">
                     <div className="col s12">
                         <div className="card-panel">
-                            <p>{ song.title }</p>
+                            <p>{ currentSong.title }</p>
                             <div className="progress">
                                 <div className="determinate" style={{width: progress + '%'}}></div>
                             </div>

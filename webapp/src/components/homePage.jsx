@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (React, Playlist, Player) {
+module.exports = function (React, Playlist) {
     return React.createClass({
         render: function () {
             return (
@@ -10,7 +10,6 @@ module.exports = function (React, Playlist, Player) {
                             <Playlist/>
                         </div>
                     </div>
-                    <Player/>
                 </div>
             );
         }
