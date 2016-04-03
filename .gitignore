@@ -33,6 +33,6 @@ songbox.tar.gz
 
 static/components
 static/webapp
-/conf/dropbox.conf
+conf/dropbox.conf
 
 .idea/
