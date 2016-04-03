@@ -1,3 +1,3 @@
 <div id="app"></div>
 
-<script src="/static/webapp/scripts/bundle.js"></script>
+<script src="/static/web-app/scripts/bundle.js"></script>

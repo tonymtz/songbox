@@ -19,7 +19,7 @@ var config = {
             '../static/css/materialize.min.css',
             '../static/css/main.css'
         ],
-        dist: '../static/webapp',
+        dist: '../static/web-app',
         mainJs: './src/main.jsx'
     }
 };
