@@ -32,7 +32,7 @@ songbox.tar.gz
 .DS_Store
 
 static/components
-static/webapp
+static/web-app
 conf/dropbox.conf
 
 .idea/

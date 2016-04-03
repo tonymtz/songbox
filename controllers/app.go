@@ -9,6 +9,7 @@ import (
 	//"fmt"
 	//
 	//"github.com/stacktic/dropbox"
+	"os"
 )
 
 type AppController struct {
@@ -16,8 +17,13 @@ type AppController struct {
 }
 
 func (c *AppController) Get() {
+	runMode := os.Getenv("BEEGO_RUNMODE")
+
+	c.Data["isProd"] = runMode == "prod"
+
 	c.Layout = "layout.html"
 	c.TplName = "app.tpl"
+
 	//o := orm.NewOrm()
 	//
 	//var users []models.Users

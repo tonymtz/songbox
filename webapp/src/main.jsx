@@ -5,12 +5,16 @@ var React = require('react');
 var Router = require('react-router');
 var fluxtore = require('fluxtore');
 
+var PATH = {
+    SONGS: window.isProd ? 'https://songbox.xyz/v1/songs' : 'http://localhost:8080/v1/songs'
+};
+
 // Stores
 
 var playlistStoreFactory = require('./stores/playlistStore.jsx');
-var playlistStore = playlistStoreFactory(fluxtore, request);
+var playlistStore = playlistStoreFactory(fluxtore, request, PATH);
 var songStoreFactory = require('./stores/songStore.jsx');
-var songStore = songStoreFactory(fluxtore, request);
+var songStore = songStoreFactory(fluxtore, request, PATH);
 
 // Components
 

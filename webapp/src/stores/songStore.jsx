@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (fluxtore, request) {
+module.exports = function (fluxtore, request, PATH) {
     var _currentSong;
 
     return fluxtore.createStore({
@@ -18,7 +18,7 @@ module.exports = function (fluxtore, request) {
                 }
             }
 
-            request('http://localhost:8080/v1/songs/' + song.path, get.bind(this));
+            request(PATH.SONGS + song.path, get.bind(this));
         },
 
         get: function () {
