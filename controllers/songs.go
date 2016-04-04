@@ -3,10 +3,10 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"github.com/tonymtz/songbox/models"
-	"strings"
 )
 
 const (
+	NEED_AUTHENTICATION = "Authentication is required"
 	EMPTY_PARAMETER = "Empty Parameter"
 )
 
@@ -18,7 +18,7 @@ func (c *SongsController) Prepare() {
 	token := c.Ctx.GetCookie("dropbox_token")
 
 	if token == "" {
-		c.Data["json"] = models.Error{Error: "token not found"}
+		c.Data["json"] = models.Error{Error: NEED_AUTHENTICATION}
 		c.ServeJSON()
 		c.StopRun()
 	}
@@ -54,11 +54,9 @@ func (c *SongsController) GetOne() {
 		c.StopRun()
 	}
 
-	file = strings.Replace(file, "~", "/", -1)
-
 	dropboxHandler := c.Ctx.Input.GetData("dropbox_handler").(*models.DropboxHandler)
 
-	url, err := dropboxHandler.GetShareableURL(file)
+	url, err := dropboxHandler.GetStreamURL(file)
 
 	if err != nil {
 		c.Ctx.ResponseWriter.WriteHeader(err.StatusCode)

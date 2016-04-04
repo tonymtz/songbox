@@ -74,14 +74,14 @@ module.exports = function (React, songStore) {
         },
 
         render: function () {
-            var currentSong = this.state.currentSong || {title: 'Welcome 2 Songbox'};
+            var currentSong = this.state.currentSong || {name: 'Welcome 2 Songbox'};
             var progress = this.state.progress ? this.state.progress.toFixed(3) : 0;
 
             return (
                 <div className="row">
                     <div className="col s12">
                         <div className="card-panel">
-                            <p>{ currentSong.title }</p>
+                            <p>{ currentSong.name }</p>
                             <div className="progress">
                                 <div className="determinate" style={{width: progress + '%'}}></div>
                             </div>

@@ -4,6 +4,7 @@ import (
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/config"
 	"github.com/tonymtz/go-dropbox"
+	"strings"
 )
 
 type DropboxHandler struct {
@@ -61,8 +62,9 @@ func (dbh *DropboxHandler) GetFolder() (*go_dropbox.Folder, *go_dropbox.DropboxE
 	return dbh.Dropbox.ListFolder()
 }
 
-func (dbh *DropboxHandler) GetShareableURL(file string) (*go_dropbox.SharedURL, *go_dropbox.DropboxError) {
-	return dbh.Dropbox.GetURL(file)
+func (dbh *DropboxHandler) GetStreamURL(file string) (*go_dropbox.SharedURL, *go_dropbox.DropboxError) {
+	file = strings.Replace(file, "~", "/", -1)
+	return dbh.Dropbox.GetMediaURL(file)
 }
 
 func (dbh *DropboxHandler) ekis() {}
