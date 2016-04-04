@@ -59,12 +59,32 @@ func (dbh *DropboxHandler) EndAuth(code string) error {
 }
 
 func (dbh *DropboxHandler) GetFolder() (*go_dropbox.Folder, *go_dropbox.DropboxError) {
-	return dbh.Dropbox.ListFolder()
+	//dbh.Dropbox.Debug = true
+	folder, err := dbh.Dropbox.ListFolder()
+
+	if err != nil {
+		return nil, err
+	}
+
+	var filteredEntries []*go_dropbox.Entry
+
+	for _, entry := range folder.Entries {
+		if strings.HasSuffix(entry.Path, ".mp3") {
+			filteredEntries = append(filteredEntries, entry)
+		}
+	}
+
+	filteredFolder := &go_dropbox.Folder{
+		Entries: filteredEntries,
+		HasMore: folder.HasMore,
+		Cursor: folder.Cursor,
+	}
+
+	return filteredFolder, nil
 }
 
 func (dbh *DropboxHandler) GetStreamURL(file string) (*go_dropbox.SharedURL, *go_dropbox.DropboxError) {
+	//dbh.Dropbox.Debug = true
 	file = strings.Replace(file, "~", "/", -1)
 	return dbh.Dropbox.GetMediaURL(file)
 }
-
-func (dbh *DropboxHandler) ekis() {}
