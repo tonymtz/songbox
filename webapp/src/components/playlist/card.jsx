@@ -12,12 +12,12 @@ module.exports = function (React, songStore) {
         },
 
         render: function () {
-            var title = this.props.song.title;
+            var name = this.props.song.name;
 
             return (
                 <li className="collection-item">
                     <div>
-                        <span>{ title }</span>
+                        <span>{ name }</span>
 
                         <a onClick={this.onPlayClick} className="secondary-content">
                             <i className="material-icons">play_circle_outline</i>

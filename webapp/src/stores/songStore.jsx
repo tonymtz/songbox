@@ -18,7 +18,7 @@ module.exports = function (fluxtore, request, PATH) {
                 }
             }
 
-            request(PATH.SONGS + '/' + song.path, get.bind(this));
+            request(PATH.SONGS + '/' + song.name, get.bind(this));
         },
 
         get: function () {

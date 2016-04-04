@@ -1,11 +1,13 @@
 package controllers
 
 import (
-	"strings"
-
 	"github.com/astaxie/beego"
 	"github.com/tonymtz/songbox/models"
-	"github.com/stacktic/dropbox"
+	"strings"
+)
+
+const (
+	EMPTY_PARAMETER = "Empty Parameter"
 )
 
 type SongsController struct {
@@ -13,16 +15,7 @@ type SongsController struct {
 }
 
 func (c *SongsController) Prepare() {
-	token := c.Ctx.GetCookie("dropbox_token");
-
-	dbProvider := dropbox.NewDropbox()
-
-	dbProvider.SetAppInfo(
-		beego.AppConfig.String("dropbox_key"),
-		beego.AppConfig.String("dropbox_secret"),
-	)
-
-	dbProvider.SetAccessToken(token)
+	token := c.Ctx.GetCookie("dropbox_token")
 
 	if token == "" {
 		c.Data["json"] = models.Error{Error: "token not found"}
@@ -30,48 +23,46 @@ func (c *SongsController) Prepare() {
 		c.StopRun()
 	}
 
-	c.Ctx.Input.SetData("dropbox_provider", dbProvider);
+	dropboxHandler := models.NewDropboxHandler()
+	dropboxHandler.Dropbox.SetAccessToken(token)
+
+	c.Ctx.Input.SetData("dropbox_handler", dropboxHandler);
 }
 
 func (c *SongsController) Get() {
-	dbProvider := c.Ctx.Input.GetData("dropbox_provider").(*dropbox.Dropbox)
+	dropboxHandler := c.Ctx.Input.GetData("dropbox_handler").(*models.DropboxHandler)
 
-	metadata, _ := dbProvider.Metadata("", true, false, "", "", 0)
+	folder, err := dropboxHandler.GetFolder()
 
-	var songCollection []models.Song
-
-	for _, song := range metadata.Contents {
-		// TODO - what happens with paths?
-		songPath := strings.TrimPrefix(song.Path, "/")
-
-		newSong := models.Song{
-			Path: songPath,
-			Title: songPath,
-		}
-		songCollection = append(songCollection, newSong)
-	}
-
-	c.Data["json"] = songCollection
-	c.ServeJSON()
-}
-
-func (c *SongsController) GetOne() {
-	songPath := c.Ctx.Input.Param(":path")
-
-	if songPath == "" {
-		c.Data["json"] = models.Error{Error: "file not found"}
+	if err != nil {
+		c.Ctx.ResponseWriter.WriteHeader(err.StatusCode)
+		c.Data["json"] = models.Error{Error: err.ErrorSummary}
 		c.ServeJSON()
 		c.StopRun()
 	}
 
-	songPath = strings.Replace(songPath, "~", "/", -1)
+	c.Data["json"] = folder.Entries
+	c.ServeJSON()
+}
 
-	dbProvider := c.Ctx.Input.GetData("dropbox_provider").(*dropbox.Dropbox)
+func (c *SongsController) GetOne() {
+	file := c.Ctx.Input.Param(":path")
 
-	url, err := dbProvider.Media(songPath)
+	if file == "" {
+		c.Data["json"] = models.Error{Error: EMPTY_PARAMETER}
+		c.ServeJSON()
+		c.StopRun()
+	}
+
+	file = strings.Replace(file, "~", "/", -1)
+
+	dropboxHandler := c.Ctx.Input.GetData("dropbox_handler").(*models.DropboxHandler)
+
+	url, err := dropboxHandler.GetShareableURL(file)
 
 	if err != nil {
-		c.Data["json"] = models.Error{Error: "path not given"}
+		c.Ctx.ResponseWriter.WriteHeader(err.StatusCode)
+		c.Data["json"] = models.Error{Error: err.ErrorSummary}
 		c.ServeJSON()
 		c.StopRun()
 	}
