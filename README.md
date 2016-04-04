@@ -4,7 +4,7 @@
 
 This is an audio player that lets you listen your favorite music directly from your Dropbox.
 
-Live version is here: [http://songbox.xyz](http://songbox.xyz)
+Live version is here: [https://songbox.xyz](https://songbox.xyz)
 
 ### Development
 
