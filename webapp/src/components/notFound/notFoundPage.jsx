@@ -5,7 +5,11 @@ module.exports = function (React) {
         render: function () {
             return (
                 <div>
-                    <h1>Not Found</h1>
+                    <div className="row">
+                        <div className="col s12">
+                            <h5>Not Found</h5>
+                        </div>
+                    </div>
                 </div>
             );
         }
