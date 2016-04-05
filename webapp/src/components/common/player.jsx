@@ -129,7 +129,7 @@ module.exports = function (React, playlistStore, songStore) {
                             <div className="title">{ currentSong.name }</div>
                             <div className="time">
                                 <span className="light">{ currentTime }</span>
-                                /
+                                <span className="divisor">/</span>
                                 { songDuration }
                             </div>
                         </div>

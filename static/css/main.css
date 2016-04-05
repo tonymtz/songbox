@@ -107,6 +107,7 @@
 }
 
 .container.long {
+    margin-top: 3em;
     margin-bottom: 6em;
 }
 
@@ -139,6 +140,10 @@
 
 .player .data .time .light {
     color: #cccccc;
+}
+
+.player .data .time .divisor {
+    margin: 0 2px;
 }
 
 .player .controls {
