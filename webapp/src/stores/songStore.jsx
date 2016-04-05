@@ -25,12 +25,10 @@ module.exports = function (fluxtore, request, PATH) {
             return _currentSong;
         },
 
-        actions: {
-            play: function (song) {
-                this._get(song, function () {
-                    _currentSong = song;
-                });
-            }
+        play: function (song) {
+            this._get(song, function () {
+                _currentSong = song;
+            });
         }
     });
 };

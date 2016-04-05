@@ -11,19 +11,19 @@ var PATH = {
 
 // Stores
 
-var playlistStoreFactory = require('./stores/playlistStore.jsx');
-var playlistStore = playlistStoreFactory(fluxtore, request, PATH);
 var songStoreFactory = require('./stores/songStore.jsx');
 var songStore = songStoreFactory(fluxtore, request, PATH);
+var playlistStoreFactory = require('./stores/playlistStore.jsx');
+var playlistStore = playlistStoreFactory(fluxtore, request, PATH, songStore);
 
 // Components
 
 var cardFactory = require('./components/playlist/card.jsx');
-var Card = cardFactory(React, songStore);
+var Card = cardFactory(React, playlistStore);
 var playlistFactory = require('./components/playlist/playlist.jsx');
 var Playlist = playlistFactory(React, Card, playlistStore);
 var playerFactory = require('./components/common/player.jsx');
-var Player = playerFactory(React, songStore);
+var Player = playerFactory(React, playlistStore, songStore);
 
 // Pages
 

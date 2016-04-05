@@ -1,14 +1,15 @@
 'use strict';
 
-module.exports = function (React, songStore) {
+module.exports = function (React, playlistStore) {
     // TODO - duplicating props
     return React.createClass({
         propTypes: {
+            refKey: React.PropTypes.number.isRequired,
             song: React.PropTypes.object.isRequired
         },
 
         onPlayClick: function () {
-            songStore.play(this.props.song);
+            playlistStore.play(this.props.refKey);
         },
 
         render: function () {
@@ -20,7 +21,7 @@ module.exports = function (React, songStore) {
                         <span>{ name }</span>
 
                         <a onClick={this.onPlayClick} className="secondary-content">
-                            <i className="material-icons">play_circle_outline</i>
+                            <i className="material-icons custom">play_circle_outline</i>
                         </a>
                     </div>
                 </li>
