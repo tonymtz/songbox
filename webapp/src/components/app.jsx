@@ -9,7 +9,7 @@ module.exports = function (React, Router, Player) {
             return (
                 <div>
                     <Header/>
-                    <div className="container">
+                    <div className="container long">
                         <RouterHandler/>
                         <Player/>
                     </div>

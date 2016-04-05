@@ -24,6 +24,7 @@ module.exports = function (React, Card, playlistStore) {
                     <Card
                         key={index}
                         song={song}
+                        refKey={index}
                     />
                 );
             });

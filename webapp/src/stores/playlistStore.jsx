@@ -1,7 +1,8 @@
 'use strict';
 
-module.exports = function (fluxtore, request, PATH) {
+module.exports = function (fluxtore, request, PATH, songStore) {
     var _cache = [];
+    var _currentIndex;
 
     return fluxtore.createStore({
         events: ['change'],
@@ -25,10 +26,27 @@ module.exports = function (fluxtore, request, PATH) {
                 this._get();
             }
 
-            return {songs: _cache};
+            return {
+                songs: _cache.sort(function (a, b) {
+                    return a.name > b.name;
+                })
+            };
         },
 
         actions: {
+            next: function () {
+                _currentIndex += 1;
+
+                if (_currentIndex >= _cache.length) {
+                    _currentIndex = 0;
+                }
+
+                songStore.play(_cache[_currentIndex]);
+            },
+            play: function (song) {
+                _currentIndex = song;
+                songStore.play(_cache[song] || {});
+            },
             refresh: function () {
                 this._get(function () {
                     _cache = [];
