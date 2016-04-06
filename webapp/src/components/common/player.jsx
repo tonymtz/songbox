@@ -99,6 +99,11 @@ module.exports = function (React, playlistStore, songStore) {
         },
 
         pause: function () {
+            if (!this.state.audio) {
+                playlistStore.play(0);
+                return;
+            }
+
             var isPlaying = this.state.isPlaying;
 
             if (isPlaying) {
@@ -121,6 +126,7 @@ module.exports = function (React, playlistStore, songStore) {
             var progress = this.state.progress ? this.state.progress.toFixed(3) : 0;
             var songDuration = convertTime(this.state.songDuration);
             var currentTime = convertTime(this.state.currentTime);
+            var playPauseButton = this.state.isPlaying ? 'pause' : 'play_arrow';
 
             return (
                 <div className="player">
@@ -135,7 +141,7 @@ module.exports = function (React, playlistStore, songStore) {
                         </div>
                         <div className="controls">
                             <button className="btn blue" onClick={this.pause}>
-                                <i className="small material-icons">pause</i>
+                                <i className="small material-icons">{ playPauseButton }</i>
                             </button>
                             <button className="btn blue disabled">
                                 <i className="small material-icons">fast_rewind</i>

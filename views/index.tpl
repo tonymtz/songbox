@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col s12 m7">
                 <h1 class="header">This is your Songbox</h1>
-                <h5 class="header">Soundbox is a media player that lets you listen your favorite music directly from your <span>Dropbox</span>.</h5>
+                <h5 class="header">Songbox is a media player that lets you listen your favorite music directly from your <span>Dropbox</span>.</h5>
             </div>
             <div class="col s12 m5 songbox"></div>
         </div>
