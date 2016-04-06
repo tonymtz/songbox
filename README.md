@@ -6,6 +6,8 @@ This is an audio player that lets you listen your favorite music directly from y
 
 Live version is here: [https://songbox.xyz](https://songbox.xyz)
 
+Trello board: [https://trello.com/b/IHObRdXm/songbox](https://trello.com/b/IHObRdXm/songbox)
+
 ### Development
 
 You need to have golang installed & GOPATH configured
