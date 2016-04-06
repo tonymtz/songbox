@@ -28,9 +28,13 @@ module.exports = function (fluxtore, request, PATH, songStore) {
 
             return {
                 songs: _cache.sort(function (a, b) {
-                    return a.name > b.name;
+                    return a.name.localeCompare(b.name);
                 })
             };
+        },
+
+        getCurrentIndex: function () {
+            return _currentIndex;
         },
 
         actions: {
@@ -41,11 +45,13 @@ module.exports = function (fluxtore, request, PATH, songStore) {
                     _currentIndex = 0;
                 }
 
-                songStore.play(_cache[_currentIndex]);
+                songStore.play(_cache[_currentIndex]); // TODO - might be a noob movement here
+                this.emitChange();
             },
             play: function (song) {
                 _currentIndex = song;
-                songStore.play(_cache[song] || {});
+                songStore.play(_cache[song] || {}); // TODO - might be a noob movement here
+                this.emitChange();
             },
             refresh: function () {
                 this._get(function () {
