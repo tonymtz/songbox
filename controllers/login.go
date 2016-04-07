@@ -34,9 +34,8 @@ func (c *LoginController) Callback() {
 		return
 	}
 
-	// TODO - avoid send token/uid
+	// TODO - avoid send token
 	c.Ctx.SetCookie("dropbox_token", dropboxHandler.Token.Token)
-	c.Ctx.SetCookie("dropbox_uid", dropboxHandler.Token.UID)
 
 	c.Redirect("/app/", 302)
 }
