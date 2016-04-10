@@ -19,7 +19,7 @@
                 <h1 class="header">This is your Songbox</h1>
                 <h5 class="header">Songbox is a media player that lets you listen your favorite music directly from your <span>Dropbox</span>.</h5>
             </div>
-            <div class="col s12 m5 songbox"></div>
+            <div class="col s12 m5 songbox hide-on-small-only"></div>
         </div>
         <div class="row center">
             <a href="/login" class="waves-effect waves-teal btn btn-large white">

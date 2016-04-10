@@ -119,6 +119,18 @@
     color: #03a9f4;
 }
 
+.preloader-wrapper {
+    bottom: 7.5em;
+    position: fixed;
+    right: 1em;
+    z-index: 9;
+}
+
+.preloader-wrapper.small {
+    width: 24px;
+    height: 24px;
+}
+
 .player {
     background: #ffffff;
     bottom: 0;
@@ -178,4 +190,20 @@
 .player .volume {
     float: right;
     padding: 0.25em;
+}
+
+.collection-item {
+    height: 3em;
+}
+
+.collection-item a {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 2.5em);
+}
+
+.collection-item a.secondary-content {
+    width: auto !important;
 }
