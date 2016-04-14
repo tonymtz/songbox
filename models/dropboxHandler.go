@@ -58,6 +58,30 @@ func (dbh *DropboxHandler) EndAuth(code string) error {
 	return nil
 }
 
+func (dbh *DropboxHandler) GetFolders() ([]*Playlist, *go_dropbox.DropboxError) {
+	//dbh.Dropbox.Debug = true
+	folder, err := dbh.Dropbox.ListFolder()
+
+	if err != nil {
+		return nil, err
+	}
+
+	var filteredPlaylists []*Playlist
+
+	for _, entry := range folder.Entries {
+		if strings.HasSuffix(entry.Tag, "folder") {
+			newPlaylist := &Playlist{
+				UID: entry.UID,
+				Name: entry.Name,
+				Path: entry.Path,
+			}
+			filteredPlaylists = append(filteredPlaylists, newPlaylist)
+		}
+	}
+
+	return filteredPlaylists, nil
+}
+
 func (dbh *DropboxHandler) GetFolder() (*go_dropbox.Folder, *go_dropbox.DropboxError) {
 	//dbh.Dropbox.Debug = true
 	folder, err := dbh.Dropbox.ListFolder()

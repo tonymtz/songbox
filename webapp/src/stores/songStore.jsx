@@ -7,7 +7,7 @@ module.exports = function (fluxtore, request, PATH) {
         events: ['change'],
 
         _get: function (song, cb) {
-            function get(err, response, body) {
+            function get(err, response, body) { // bluebird
                 if (!err && response.statusCode === 200) {
                     if (cb) {
                         cb();

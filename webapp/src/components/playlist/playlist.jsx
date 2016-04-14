@@ -1,25 +1,26 @@
 'use strict';
 
-module.exports = function (React, Card, playlistStore) {
-    return React.createClass({
+module.exports = function (React, Card, playlistStore, _) {
+
+    var playlistComponent = React.createClass({
         getInitialState: function () {
-            return playlistStore.get();
+            return _getSongsState();
         },
 
         componentWillMount: function () {
-            playlistStore.addChangeListener(this.onSongStateChange);
+            playlistStore.addChangeListener(this.onPlaylistStateChange);
         },
 
         componentWillUnmount: function () {
-            playlistStore.removeChangeListener(this.onSongStateChange);
+            playlistStore.removeChangeListener(this.onPlaylistStateChange);
         },
 
-        onSongStateChange: function () {
-            this.setState(playlistStore.get());
+        onPlaylistStateChange: function () {
+            this.setState(_getSongsState());
         },
 
         createCards: function () {
-            return this.state.songs.map(function (song, index) {
+            return _.map(this.state.songs, function (song, index) {
                 return (
                     <Card
                         key={index}
@@ -58,4 +59,12 @@ module.exports = function (React, Card, playlistStore) {
             );
         }
     });
+
+    function _getSongsState() {
+        return {
+            songs: playlistStore.getSongs()
+        };
+    }
+
+    return playlistComponent;
 };

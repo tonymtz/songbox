@@ -1,19 +1,36 @@
 'use strict';
 
-module.exports = function (React, playlistStore) {
-    return React.createClass({
+module.exports = function (React, playerStore) {
+    var cardComponent = React.createClass({
         propTypes: {
             refKey: React.PropTypes.number.isRequired,
             song: React.PropTypes.object.isRequired
         },
 
+        // getInitialState: function () {
+        //     return _getCardState();
+        // },
+        //
+        // componentWillMount: function () {
+        //     playlistStore.addChangeListener(this.onPlaylistStateChange);
+        // },
+        //
+        // componentWillUnmount: function () {
+        //     playlistStore.removeChangeListener(this.onPlaylistStateChange);
+        // },
+
+        onPlaylistStateChange: function () {
+            this.setState(_getCardState());
+        },
+
         onPlayClick: function () {
-            playlistStore.play(this.props.refKey);
+            playerStore.loadSong(this.props.refKey);
         },
 
         render: function () {
             var name = this.props.song.name;
-            var isPlayingClass = playlistStore.getCurrentIndex() === this.props.refKey ? ' blue lighten-5' : '';
+            // var isPlayingClass = this.state.currentIndex === this.props.refKey ? ' blue lighten-5' : '';
+            var isPlayingClass = '';
             var collectionItemClass = 'collection-item' + isPlayingClass;
 
             return (
@@ -29,4 +46,12 @@ module.exports = function (React, playlistStore) {
             );
         }
     });
+
+    return cardComponent;
+
+    // function _getCardState() {
+    //     return {
+    //         currentIndex: playlistStore.getCurrentIndex()
+    //     };
+    // }
 };

@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (React, Router, Player) {
+module.exports = function (React, Router, Player, Spinner) {
     var Header = require('./common/header.jsx')(React, Router);
     var RouterHandler = Router.RouteHandler;
 
@@ -11,6 +11,7 @@ module.exports = function (React, Router, Player) {
                     <Header/>
                     <div className="container long">
                         <RouterHandler/>
+                        <Spinner/>
                         <Player/>
                     </div>
                 </div>

@@ -73,4 +73,4 @@ gulp.task('watch', function () {
 });
 
 gulp.task('build', ['js', 'lint']);
-gulp.task('default', ['js', 'lint', 'watch']);
+gulp.task('default', ['js', 'watch']); // jshint
