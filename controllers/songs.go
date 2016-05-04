@@ -32,7 +32,7 @@ func (c *SongsController) Prepare() {
 func (c *SongsController) Get() {
 	dropboxHandler := c.Ctx.Input.GetData("dropbox_handler").(*models.DropboxHandler)
 
-	folder, err := dropboxHandler.GetFolder()
+	matches, err := dropboxHandler.GetMusic()
 
 	if err != nil {
 		c.Ctx.ResponseWriter.WriteHeader(err.StatusCode)
@@ -41,7 +41,7 @@ func (c *SongsController) Get() {
 		c.StopRun()
 	}
 
-	c.Data["json"] = folder.Entries
+	c.Data["json"] = matches
 	c.ServeJSON()
 }
 

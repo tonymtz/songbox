@@ -58,30 +58,7 @@ func (dbh *DropboxHandler) EndAuth(code string) error {
 	return nil
 }
 
-func (dbh *DropboxHandler) GetFolders() ([]*Playlist, *go_dropbox.DropboxError) {
-	//dbh.Dropbox.Debug = true
-	folder, err := dbh.Dropbox.ListFolder()
-
-	if err != nil {
-		return nil, err
-	}
-
-	var filteredPlaylists []*Playlist
-
-	for _, entry := range folder.Entries {
-		if strings.HasSuffix(entry.Tag, "folder") {
-			newPlaylist := &Playlist{
-				UID: entry.UID,
-				Name: entry.Name,
-				Path: entry.Path,
-			}
-			filteredPlaylists = append(filteredPlaylists, newPlaylist)
-		}
-	}
-
-	return filteredPlaylists, nil
-}
-
+// DEPRECATED
 func (dbh *DropboxHandler) GetFolder() (*go_dropbox.Folder, *go_dropbox.DropboxError) {
 	//dbh.Dropbox.Debug = true
 	folder, err := dbh.Dropbox.ListFolder()
@@ -111,4 +88,48 @@ func (dbh *DropboxHandler) GetStreamURL(file string) (*go_dropbox.SharedURL, *go
 	//dbh.Dropbox.Debug = true
 	file = strings.Replace(file, "~", "/", -1)
 	return dbh.Dropbox.GetMediaURL(file)
+}
+
+type playlistResponse struct {
+	Playlists []*Playlist `json:"playlists"`
+}
+
+func (dbh *DropboxHandler) GetMusic() (*playlistResponse, *go_dropbox.DropboxError) {
+	//dbh.Dropbox.Debug = true
+	search, err := dbh.Dropbox.SearchMusic()
+
+	if err != nil {
+		return nil, err
+	}
+
+	songsMap := make(map[string][]*Song)
+
+	for _, entry := range search.Matches {
+		path := strings.Split(entry.Metadata.Path, "/")
+
+		mySong := &Song{
+			Title: entry.Metadata.Name,
+			Path: entry.Metadata.Path,
+		}
+
+		playlist := path[len(path) - 2];
+		songsMap[playlist] = append(songsMap[playlist], mySong)
+	}
+
+	var playlistCollection []*Playlist
+
+	for playlistName, songs := range songsMap {
+		newPlaylist := &Playlist{
+			Name: playlistName,
+			Songs: songs,
+		}
+
+		playlistCollection = append(playlistCollection, newPlaylist)
+	}
+
+	playlistResponse := &playlistResponse{
+		Playlists: playlistCollection,
+	}
+
+	return playlistResponse, nil
 }
