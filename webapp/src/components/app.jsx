@@ -1,20 +1,19 @@
-'use strict';
-
-module.exports = function (React, Router, Player) {
-    var Header = require('./common/header.jsx')(React, Router);
-    var RouterHandler = Router.RouteHandler;
-
-    return React.createClass({
-        render: function () {
+export default function(React, Header, Spinner, Player) {
+    class App extends React.Component {
+        render() {
             return (
-                <div>
+                <section>
                     <Header/>
-                    <div className="container long">
-                        <RouterHandler/>
-                        <Player/>
-                    </div>
-                </div>
+
+                    { this.props.children }
+
+                    <Spinner/>
+
+                    <Player/>
+                </section>
             );
         }
-    });
+    }
+
+    return App;
 };

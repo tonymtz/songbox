@@ -1,122 +1,158 @@
 /*------------------------------------*\
-    #Section META
+    LANDING
 \*------------------------------------*/
-.section {
-    /*
-     * Don't touch .flow-text because
-     * it has special properties defined by
-     * materialize.css. All other based in at 18px.
-     */
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
 
-.section p:not(.flow-text) {
-    font-size: 1.2rem;
+.big-screen {
+    background-image: url("/static/img/bkg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
 }
 
-.section h2 {
-    color: #DD5A2B;
-    font-weight: bold;
-    margin: 3rem 0 4rem;
+.big-screen h5 {
+    color: #02312D;
+    font-size: 3em;
+    font-weight: 300;
+    margin-top: 18rem;
 }
 
-.section .btn {
-    background-color: #26a69a;
+.big-screen h5 span {
+    font-weight: 700;
 }
 
-/*------------------------------------*\
-    #HERO Section
-\*------------------------------------*/
-.section__hero {
-    height: 100vh;
-    height: auto;
-    padding-top: 5%;
-    padding-bottom: 5%;
-    position: relative;
-    background-color: #03a9f4;
-}
-
-.section__hero h1.header,
-.section__hero h5.header {
-    color: white;
-}
-
-.section__hero h5 {
-    line-height: 2.3rem;
-}
-
-.section__hero h5 span {
-    border-bottom: 2px solid white;
-}
-
-.section__hero h1 {
-    font-weight: bold;
-    font-size: 4.2rem;
-    line-height: 1.10;
-    color: #393939;
-}
-
-.section__hero .btn {
-    color: #03a9f4;
+.big-screen .btn {
+    color: #02312D;
     font-size: 1.5em;
     width: 20rem;
     margin-top: 1.5rem;
+    text-transform: none;
+    font-size: 1.5em;
+    font-weight: 600;
+    line-height: 3.5em;
 }
 
-.section__hero .btn-large {
+.big-screen .btn-large {
     height: 74px;
     line-height: 76px;
 }
 
-.section__hero .btn .icon {
+.big-screen .btn .icon {
     display: inline-block;
     width: 2em;
-    height: 1.8em;
-    fill: currentColor;
+    height: 100%;
+    fill: #03a9f4;
     vertical-align: middle;
 }
 
-.section__hero .songbox {
-    display: inline-block;
-    height: 330px;
-    background-image: url("/static/favicon/ms-icon-310x310.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-.section__hero .btn__main-cta {
-    height: 3rem;
-}
-
-@media (max-width: 993px) {
-    .section__hero {
-        height: auto;
-    }
-
-    .section__hero h1 {
-        font-size: 3.5rem;
-    }
+.waves-effect.waves-blue .waves-ripple {
+    background-color: rgba(3, 169, 244, 0.65);
 }
 
 /*------------------------------------*\
-    #Section WEBAPP
+    WEBAPP
 \*------------------------------------*/
+
+/*
+lightest - DBEEFD
+lighter - 60A4D8
+light - 3A8ECE
+primary - 157AC8
+dark - 0760A5
+darker - 05497E
+
+yellow - C4B200
+*/
 
 #app {
     color: #666;
 }
 
+.main.container {
+    padding-bottom: 5em;
+}
+
+a,
 .pointer {
     cursor: pointer;
+}
+
+.no-songs {
+    height: 10rem;
+}
+
+.collection.playlists {
+    border: none;
+}
+
+.collection.playlists .collection-item {
+    border: none;
+    color: #157AC8;
+}
+
+.collection.playlists .collection-item a.truncate {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 2em);
+}
+
+.collection.playlists .collection-item.active {
+    background-color: #95C2E4;
+    color: white;
+}
+
+.collection.playlists .collection-item.active .el {
+    /*color: #f4e242;*/
+    color: #f7e983;
+}
+
+.collection.playlists .collection-item:not(.active):hover {
+    background-color: #DBEEFD;
+}
+
+.collection.playlists .collection-item .el {
+    color: #C4B200;
+    margin-right: 0.5em;
+}
+
+/**/
+
+.collection.songs .collection-item a,
+.collection.songs .collection-item .el {
+    color: #157AC8;
+}
+
+.collection.songs .collection-item a.truncate {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 2em);
+}
+
+.collection.songs .collection-item.active {
+    background-color: #95C2E4;
+}
+
+.collection.songs .collection-item.active a,
+.collection.songs .collection-item.active i {
+    color: white;
+}
+
+.collection.songs .collection-item:not(.active):hover {
+    background-color: #DBEEFD;
 }
 
 .container.long {
     margin-top: 3em;
     margin-bottom: 6em;
-}
-
-.material-icons.custom {
-    color: #03a9f4;
 }
 
 .preloader-wrapper {
@@ -175,6 +211,10 @@
     margin-left: 0;
 }
 
+.player .controls .btn .el {
+    font-size: 1em;
+}
+
 .player .progress {
     background-color: #bbdefb;
     height: 1em;
@@ -190,20 +230,4 @@
 .player .volume {
     float: right;
     padding: 0.25em;
-}
-
-.collection-item {
-    height: 3em;
-}
-
-.collection-item a {
-    display: inline-block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: calc(100% - 2.5em);
-}
-
-.collection-item a.secondary-content {
-    width: auto !important;
 }

@@ -1,40 +1,80 @@
-'use strict';
+/*
+ * Start Point
+ */
 
-var request = require('request');
-var React = require('react');
-var Router = require('react-router');
-var fluxtore = require('fluxtore');
+import React  from 'react';
+import { render }  from 'react-dom';
+import { Router, Route, IndexRoute, browserHistory, Link } from 'react-router';
+import fluxtore from 'fluxtore';
+import request from 'request';
+import lodash from 'lodash';
 
-var PATH = {
+let PATH = {
     SONGS: window.isProd ? 'https://songbox.xyz/v1/songs' : 'http://localhost:8080/v1/songs'
 };
 
-// Stores
+/*
+ * Stores
+ */
 
-var songStoreFactory = require('./stores/songStore.jsx');
-var songStore = songStoreFactory(fluxtore, request, PATH);
-var playlistStoreFactory = require('./stores/playlistStore.jsx');
-var playlistStore = playlistStoreFactory(fluxtore, request, PATH, songStore);
+import spinnerStoreFactory from './stores/spinner-store';
+let spinnerStore = spinnerStoreFactory(fluxtore);
 
-// Components
+import musicStoreFactory from './stores/music-store';
+let musicStore = musicStoreFactory(fluxtore, request, lodash, PATH, spinnerStore);
 
-var cardFactory = require('./components/playlist/card.jsx');
-var Card = cardFactory(React, playlistStore);
-var playlistFactory = require('./components/playlist/playlist.jsx');
-var Playlist = playlistFactory(React, Card, playlistStore);
-var playerFactory = require('./components/common/player.jsx');
-var Player = playerFactory(React, playlistStore, songStore);
+import playerStoreFactory from './stores/player-store';
+let playerStore = playerStoreFactory(fluxtore, request, PATH, musicStore);
 
-// Pages
+/*
+ * Components
+ */
 
-var App = require('./components/app.jsx')(React, Router, Player);
-var Home = require('./components/homePage.jsx')(React, Playlist);
-var About = require('./components/about/aboutPage.jsx')(React);
-var NotFound = require('./components/notFound/notFoundPage.jsx')(React);
+import HeaderFactory from './components/header.jsx';
+let Header = HeaderFactory(React, Link);
 
-var routesFactory = require('./routes.jsx');
-var routes = routesFactory(React, Router, App, Home, About, NotFound);
+import PlaylistsItemFactory from './components/playlists-item.jsx';
+let PlaylistsItem = PlaylistsItemFactory(React, Link);
 
-Router.run(routes, function (Handler) {
-    React.render(<Handler/>, document.getElementById('app'));
-});
+import SongsItemFactory from './components/songs-item.jsx';
+let SongsItem = SongsItemFactory(React, Link);
+
+/*
+ * Containers
+ */
+
+import PlayerFactory from './containers/player.jsx';
+let Player = PlayerFactory(React, playerStore, musicStore);
+
+import SpinnerFactory from './containers/spinner.jsx';
+let Spinner = SpinnerFactory(React, spinnerStore);
+
+import PlaylistsFactory from './containers/playlists.jsx';
+let Playlists = PlaylistsFactory(React, musicStore, PlaylistsItem);
+
+import SongsFactory from './containers/songs.jsx';
+let Songs = SongsFactory(React, musicStore, SongsItem);
+
+/*
+ * Routes
+ */
+
+import AppFactory from './components/app.jsx';
+let App = AppFactory(React, Header, Spinner, Player);
+
+import HomePageFactory from './components/home-page.jsx';
+let HomePage = HomePageFactory(React, Playlists, Songs);
+
+/*
+ * App
+ */
+
+let routes = (
+    <Router history={browserHistory}>
+        <Route path="/app" component={ App }>
+            <IndexRoute component={ HomePage }/>
+        </Route>
+    </Router>
+);
+
+render(routes, document.getElementById('app'));
