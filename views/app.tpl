@@ -4,4 +4,4 @@
     window.isProd ={{.isProd}};
 </script>
 
-<script src="/static/web-app/scripts/bundle.js"></script>
+<script src="/static/web-app/bundle.js"></script>

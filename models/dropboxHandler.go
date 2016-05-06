@@ -113,6 +113,11 @@ func (dbh *DropboxHandler) GetMusic() (*playlistResponse, *go_dropbox.DropboxErr
 		}
 
 		playlist := path[len(path) - 2];
+
+		if playlist == "" {
+			playlist = "root"
+		}
+
 		songsMap[playlist] = append(songsMap[playlist], mySong)
 	}
 

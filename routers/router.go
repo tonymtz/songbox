@@ -9,8 +9,6 @@ func init() {
 	beego.Router("/", &controllers.MainController{})
 
 	apiv1 := beego.NewNamespace("/v1",
-		beego.NSRouter("/playlists", &controllers.PlaylistsController{}),
-
 		beego.NSRouter("/songs", &controllers.SongsController{}),
 		beego.NSRouter("/songs/:path", &controllers.SongsController{}, "get:GetOne"),
 	)
