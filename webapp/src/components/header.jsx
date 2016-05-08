@@ -14,6 +14,7 @@ export default function(React, Link) {
                     <div className="container">
                         <Link to="app" className="brand-logo left">Songbox</Link>
 
+                        <a href="/logout" className="right">&nbsp;&nbsp; Log out</a>
                         <span className="right">Welcome back!</span>
                     </div>
                 </div>

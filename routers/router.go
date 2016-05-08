@@ -17,6 +17,7 @@ func init() {
 
 	beego.Router("/app", &controllers.AppController{})
 
-	beego.Router("/login", &controllers.LoginController{})
-	beego.Router("/login/callback", &controllers.LoginController{}, "get:Callback")
+	beego.Router("/login/dropbox", &controllers.LoginController{}, "get:Dropbox")
+	beego.Router("/login/dropbox/callback", &controllers.LoginController{}, "get:DropboxCallback")
+	beego.Router("/logout", &controllers.LoginController{}, "get:Logout")
 }

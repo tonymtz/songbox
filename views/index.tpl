@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="row center">
-            <a href="/login" class="waves-effect waves-blue btn btn-large white">
+            <a href="/login/dropbox" class="waves-effect waves-blue btn btn-large white">
                 <svg class="icon icon-dropbox">
                     <use xlink:href="#icon-dropbox"></use>
                 </svg>
