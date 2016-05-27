@@ -11,7 +11,7 @@ body {
 }
 
 .big-screen {
-    background-image: url("/static/img/bkg.jpg");
+    background-image: url("../img/bkg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
